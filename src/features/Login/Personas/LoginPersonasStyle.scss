@@ -1,0 +1,339 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap");
+$baseColor: #540b66;
+$secondaryColor: #c48e3c;
+
+#container-login {
+  background-image: url("../../../../src/img/logos/login-bg3.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: white;
+  font-family: "Barlow", sans-serif;
+}
+
+#bg-logo {
+  content: url("../../../../src/img/logos/Ding-Dong-Logo-Light.svg");
+  width: 90%;
+}
+
+#title-logo {
+  color: white;
+}
+
+#forgot-pass-link {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
+
+#forgot-pass-link:hover {
+  color: $secondaryColor;
+}
+
+#forgot-pass-hr {
+  width: 100px;
+  border: 1px solid white;
+}
+
+#play-store-logo {
+  width: 200px;
+  height: 100px;
+}
+
+#rememberMe {
+  cursor: pointer;
+}
+
+#col-left {
+  height: 100vh;
+}
+
+#right-col {
+  height: 100vh;
+}
+
+// #submit-btn:hover {
+//   color: #540b66;
+// }
+
+.invalidEmail-show {
+  color: red;
+  text-align: center;
+}
+
+.invalidEmail-hidden {
+  visibility: hidden;
+}
+
+.drop-down-border-radious-none {
+  border-radius: 0 !important;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.drop-down-menu-element {
+  max-height: 40px !important;
+}
+.toggle {
+  display: flex;
+  //align-self: center;
+  --width: 95px;
+  --height: calc(var(--width) / 4);
+  position: relative;
+  display: inline-block;
+  width: var(--width);
+  height: var(--height);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: var(--height);
+  cursor: pointer;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--height);
+  background-color: #ccc;
+  transition: all 0.4s ease-in-out;
+}
+
+.toggle .slider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--height));
+  height: calc(var(--height));
+  border-radius: calc(var(--height) / 2);
+  background-color: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease-in-out;
+}
+
+.togglesrc input:checked + .slider {
+  background-color: $secondaryColor;
+}
+
+.toggle input:checked + .slider::before {
+  transform: translateX(calc(var(--width) - var(--height)));
+}
+
+.toggle .labels {
+  position: absolute;
+  top: 2.9px;
+  left: 4px;
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  font-family: sans-serif;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+}
+
+.toggle .labels::after {
+  content: attr(data-off);
+  position: absolute;
+  right: 10px;
+  color: $baseColor;
+  opacity: 1;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s ease-in-out;
+}
+
+.toggle .labels::before {
+  content: attr(data-on);
+  position: absolute;
+  left: calc(var(--height) - var(--width) + 2px);
+  color: #ffffff;
+  opacity: 0;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
+  transition: all 0.4s ease-in-out;
+}
+
+.toggle input:checked ~ .labels::after {
+  opacity: 0;
+  transform: translateX(calc(var(--width) - var(--height)));
+}
+
+.toggle input:checked ~ .labels::before {
+  opacity: 1;
+  transform: translateX(calc(var(--width) - var(--height)));
+}
+
+//Pc screen resize to avoid background to superimpose
+// @media screen and (max-width: 768px) {
+//   #bg-logo {
+//     content: none;
+//     width: 50%;
+//   }
+//   #col-left {
+//     order: 2;
+//     display: none;
+//     visibility: hidden;
+
+//     background-color: $baseColor;
+//   }
+//   #right-col {
+//     order: 1;
+//     background-color: $baseColor;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+// }
+
+// @media screen and (max-width: 376px) {
+//   #bg-logo {
+//     content: url("../../../src/img/logos/Ding-Dong-Logo-Dark.svg");
+//     height: 280px;
+//   }
+//   #col-left {
+//     order: 2;
+//   }
+//   #right-col {
+//     order: 1;
+//     padding-top: 20px;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+//   #header-login {
+//     color: white;
+//   }
+//   #container-login {
+//     background-color: $baseColor;
+//     color: white;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+// }
+
+// @media screen and (min-width: 376px) and (max-width: 428px) {
+//   #bg-logo {
+//     content: url("../../../src/img/logos/Ding-Dong-Logo-Dark.svg");
+//     height: 400px;
+//   }
+//   #col-left {
+//     order: 2;
+//   }
+//   #right-col {
+//     order: 1;
+//     padding-top: 20px;
+//   }
+//   #submit-btn {
+//     margin-left: 130px;
+//     padding: 5px 30px 5px 30px;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+//   #header-login {
+//     color: white;
+//   }
+//   #container-login {
+//     background-color: $baseColor;
+//     color: white;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+// }
+
+// @media screen and (min-width: 376px) and (max-width: 390px) {
+//   #bg-logo {
+//     content: url("../../../src/img/logos/Ding-Dong-Logo-Dark.svg");
+//     height: 400px;
+//   }
+//   #col-left {
+//     order: 2;
+//   }
+//   #right-col {
+//     order: 1;
+//     padding-top: 20px;
+//   }
+//   #submit-btn {
+//     margin-left: 110px;
+//     padding: 5px 30px 5px 30px;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+//   #header-login {
+//     color: white;
+//   }
+//   #container-login {
+//     background-color: $baseColor;
+//     color: white;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+// }
+
+// @media screen and (min-width: 391px) and (max-width: 414px) {
+//   #bg-logo {
+//     content: url("../../../src/img/logos/Ding-Dong-Logo-Dark.svg");
+//     height: 400px;
+//   }
+//   #col-left {
+//     order: 2;
+//   }
+//   #right-col {
+//     order: 1;
+//     padding-top: 20px;
+//   }
+//   #submit-btn {
+//     margin-left: 120px;
+//     padding: 5px 30px 5px 30px;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+//   #header-login {
+//     color: white;
+//   }
+//   #container-login {
+//     background-color: $baseColor;
+//     color: white;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+// }
+
+// @media screen and (min-width: 391px) and (max-width: 414px) {
+//   #bg-logo {
+//     content: url("../../../src/img/logos/Ding-Dong-Logo-Dark.svg");
+//     height: 400px;
+//   }
+//   #col-left {
+//     order: 2;
+//   }
+//   #right-col {
+//     order: 1;
+//     padding-top: 20px;
+//   }
+//   #submit-btn {
+//     margin-left: 120px;
+//     padding: 5px 30px 5px 30px;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+//   #header-login {
+//     color: white;
+//   }
+//   #container-login {
+//     background-color: $baseColor;
+//     color: white;
+//   }
+//   #title-logo {
+//     color: white;
+//   }
+// }

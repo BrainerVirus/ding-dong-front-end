@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap");
+$baseColor: #540b66;
+$baseColorSecondary: #ccb6d1;
+$textColor: #fff;
+$secondaryColor: #c48e3c;
+
+footer {
+  width: 100%;
+  background-color: $baseColor;
+  position: relative;
+}
+
+#footer {
+  width: 100%;
+  ul {
+    li {
+      list-style: none;
+      a {
+        text-decoration: none;
+        color: $textColor;
+      }
+    }
+  }
+}
+
+#footer {
+  ul {
+    a:hover {
+      color: $baseColor;
+    }
+  }
+}
