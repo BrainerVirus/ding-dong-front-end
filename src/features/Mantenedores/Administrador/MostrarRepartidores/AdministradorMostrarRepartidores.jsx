@@ -6,14 +6,12 @@ import mostrarRepartidores from "./MostrarRepartidoresAdminStyle.module.scss";
 import booststrap from "../../../../scss/Global/bootstrap.min.module.css";
 import Swal from "sweetalert2";
 
-const URICuentas = "https://back-end-ding-dong-app.herokuapp.com/cuentas/";
-const URIUsuarios = "https://back-end-ding-dong-app.herokuapp.com/usuario/";
-const URIDirecciones =
-  "https://back-end-ding-dong-app.herokuapp.com/direccion/";
-const URITipoUsuario =
-  "https://back-end-ding-dong-app.herokuapp.com/tipoUsuario/";
+const URICuentas = "http://localhost:8080/cuentas/";
+const URIUsuarios = "http://localhost:8080/usuario/";
+const URIDirecciones = "http://localhost:8080/direccion/";
+const URITipoUsuario = "http://localhost:8080/tipoUsuario/";
 const URIShowRepartidores =
-  "https://back-end-ding-dong-app.herokuapp.com/tipoUsuario/show/list/repartidores";
+  "http://localhost:8080/tipoUsuario/show/list/repartidores";
 
 function AdministradorMostrarRepartidores() {
   const [cuentas, setCuentas] = useState([]);
@@ -70,7 +68,7 @@ function AdministradorMostrarRepartidores() {
     setRepartidores(response.data);
   };
 
-  const deleteAccount = async (id) => {
+  const deleteMssge = (id) => {
     Swal.fire({
       title: "¿Estás seguro que quieres eliminar a este repartidor?",
       text: "¡Este cambio no podrá ser revertido!",
@@ -87,25 +85,47 @@ function AdministradorMostrarRepartidores() {
           "El repartidor ha sido eliminado de forma satisfactoria.",
           "success"
         );
-        axios
-          .delete(URITipoUsuario + "usuario/" + id, {
-            withCredentials: true,
-            credentials: "include",
-          })
-          .then(() => {
-            axios.delete(URIDirecciones + "usuario/" + id);
-          })
-          .then(() => {
-            axios.delete(URICuentas + "usuario/" + id);
-          })
-          .then(() => {
-            axios.delete(URIUsuarios + "/" + id);
-            setIsDeleted(true);
-          });
-        //getAllAccounts();
-        setIsDeleted(true);
+        deleteAccount(id);
       }
     });
+  };
+
+  const deleteAccount = async (id) => {
+    await axios
+      .delete(URITipoUsuario + "usuario/" + id, {
+        withCredentials: true,
+        credentials: "include",
+      })
+      .then(() => {
+        axios.delete(URIDirecciones + "usuario/" + id);
+      })
+      .then(() => {
+        axios.delete(URICuentas + "usuario/" + id);
+      })
+      .then(() => {
+        axios.delete(URIUsuarios + "/" + id);
+        setIsDeleted(true);
+      });
+    //getAllAccounts();
+    setIsDeleted(true);
+    // Swal.fire({
+    //   title: "¿Estás seguro que quieres eliminar a este repartidor?",
+    //   text: "¡Este cambio no podrá ser revertido!",
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonColor: "#3085d6",
+    //   cancelButtonColor: "#d33",
+    //   cancelButtonText: "Cancelar",
+    //   confirmButtonText: "¡Si elimínalo!",
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     Swal.fire(
+    //       "¡Elimnado!",
+    //       "El repartidor ha sido eliminado de forma satisfactoria.",
+    //       "success"
+    //     );
+    //   }
+    // });
     //await axios.delete(URITipoUsuario + "usuario/" + id);
     //await axios.delete(URIDirecciones + "usuario/" + id);
     //await axios.delete(URIUsuarios + "usuario/" + id);
@@ -145,7 +165,7 @@ function AdministradorMostrarRepartidores() {
         <div className={`${mostrarRepartidores["flex-container"]}`}>
           <p>Imagen de perfil:</p>
           <img
-            src={`https://back-end-ding-dong-app.herokuapp.com/${data.profileImg}`}
+            src={`http://localhost:8080/${data.profileImg}`}
             alt="Imagen de perfil"
             style={{ width: 100, height: 100, borderRadius: "50%" }}
           />
@@ -161,7 +181,7 @@ function AdministradorMostrarRepartidores() {
             Editar
           </Link>
           <button
-            onClick={() => deleteAccount(data.usuarioId)}
+            onClick={() => deleteMssge(data.usuarioId)}
             className={`${booststrap["btn"]} ${booststrap["btn-danger"]}`}
           >
             Eliminar

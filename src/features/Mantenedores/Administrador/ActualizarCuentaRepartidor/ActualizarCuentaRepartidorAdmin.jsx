@@ -4,13 +4,13 @@ import Swal from "sweetalert2";
 import actualizarRepatidorStyle from "./ActualizarRepartidorAdminStyle.module.scss";
 import booststrap from "../../../../scss/Global/bootstrap.min.module.css";
 import { useRef, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 //import defultProfileImg from "../../../img/profile/default-profile-img.jpeg";
+const qs = require("qs");
 
-const URICuentas = "https://back-end-ding-dong-app.herokuapp.com/cuentas/";
-const URIUsuarios = "https://back-end-ding-dong-app.herokuapp.com/usuario/";
-const URIDirecciones =
-  "https://back-end-ding-dong-app.herokuapp.com/direccion/";
+const URICuentas = "http://localhost:8080/cuentas/";
+const URIUsuarios = "http://localhost:8080/usuario/";
+const URIDirecciones = "http://localhost:8080/direccion/";
 
 const RegionesYcomunas = [
   {
@@ -446,6 +446,7 @@ function AdministradorActualizarCuentaRepartidor() {
   //----------------------------------------------------------
   //form states
   const [img, setImg] = useState("");
+  const [oldProfileImg, setOldProfileImg] = useState("");
   const [preview, setPreview] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -495,10 +496,12 @@ function AdministradorActualizarCuentaRepartidor() {
   const getAccountData = async () => {
     const response = await axios.get(URICuentas + "/usuario/" + params.id);
     const oldImg = response.data.profileImg;
+    setOldProfileImg(oldImg);
+    console.log("entra al get accout data");
     console.log("email: " + response.data.user);
     console.log("imagen: " + response.data.profileImg);
     setEmail(response.data.user);
-    setPreview(`https://back-end-ding-dong-app.herokuapp.com/${oldImg}`);
+    setPreview(`http://localhost:8080/${oldImg}`);
     setPassword(response.data.password);
     setRePassword(response.data.password);
   };
@@ -527,6 +530,8 @@ function AdministradorActualizarCuentaRepartidor() {
     //setPreview(`http://localhost:8080/${response.data.profileImg}`);
   };
   //----------------------------------------------------------
+  //navitaion
+  const navigate = useNavigate();
   // profile photo upload
   const fileInputRef = useRef();
   const handleFileInput = (e) => {
@@ -842,31 +847,63 @@ function AdministradorActualizarCuentaRepartidor() {
       validCalle &&
       validNumCalle
     ) {
-      // let cuentaData = null;
-      // if (img === "") {
-      console.log("entra al imga vacio" + img);
-      const cuentaData = {
-        user: email,
-        password: password,
-        profileImg: "images\\default-profile-img.jpg",
+      const usuarioData = {
+        nombre: nombre,
+        apellidoPaterno: apellidoPaterno,
+        apellidoMaterno: apellidoMaterno,
+        run: run,
+        celular: celular,
+        fecha_nacimiento: fechaNacimiento,
       };
-      // } else {
-      //   console.log("entra al imga no vacio" + img);
-      //   cuentaData = new FormData();
-      //   cuentaData.append("profileImg", img);
-      //   cuentaData.append("user", email);
-      //   cuentaData.append("password", password);
-      // }
-      ///usuario/access-data/:id
+      let cuentaData = null;
+      if (img === "") {
+        console.log("entra a sin pic cuenta data: " + oldProfileImg);
+        cuentaData = {
+          user: email,
+          password: password,
+          profileImg:
+            oldProfileImg == "images\\default-profile-img.jpg"
+              ? "images\\default-profile-img.jpg"
+              : oldProfileImg,
+        };
+      } else {
+        console.log("ntra a con pic cuenta data: " + oldProfileImg);
+        cuentaData = new FormData();
+        cuentaData.append("profileImg", img);
+        cuentaData.append("user", email);
+        cuentaData.append("password", password);
+      }
+
+      const direccionData = {
+        calle: calle,
+        numCalle: numCalle,
+        comuna: comuna,
+        region: region,
+      };
       await axios
-        .put(URICuentas + "usuario/access-data/" + params.id, cuentaData)
+        .put(URIUsuarios + params.id, qs.stringify(usuarioData))
         .then((result) => {
+          if (img === "") {
+            axios.put(
+              URICuentas + "/usuario/access-data/" + params.id,
+              cuentaData
+            );
+          } else {
+            axios.put(URICuentas + "usuario/update/" + params.id, cuentaData);
+          }
+          axios.put(URIDirecciones + "usuario/" + params.id, direccionData);
+          //messege success
+          cleanStates(e);
+          //handleShowMessege();
           Swal.fire({
             text: "Actualización de datos exitosa",
             icon: "success",
             showConfirmButton: false,
             timer: 2000,
           });
+          setTimeout(() => {
+            navigate("/cuenta/administrador/list-repartidores");
+          }, 2000);
         })
         .catch((err) => {
           console.log(err);
