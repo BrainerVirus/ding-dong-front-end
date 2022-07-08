@@ -6,12 +6,14 @@ import mostrarRepartidores from "./MostrarRepartidoresAdminStyle.module.scss";
 import booststrap from "../../../../scss/Global/bootstrap.min.module.css";
 import Swal from "sweetalert2";
 
-const URICuentas = "http://localhost:8080/cuentas/";
-const URIUsuarios = "http://localhost:8080/usuario/";
-const URIDirecciones = "http://localhost:8080/direccion/";
-const URITipoUsuario = "http://localhost:8080/tipoUsuario/";
+const URICuentas = "https://back-end-ding-dong-app.herokuapp.com/cuentas/";
+const URIUsuarios = "https://back-end-ding-dong-app.herokuapp.com/usuario/";
+const URIDirecciones =
+  "https://back-end-ding-dong-app.herokuapp.com/direccion/";
+const URITipoUsuario =
+  "https://back-end-ding-dong-app.herokuapp.com/tipoUsuario/";
 const URIShowRepartidores =
-  "http://localhost:8080/tipoUsuario/show/list/repartidores";
+  "https://back-end-ding-dong-app.herokuapp.com/tipoUsuario/show/list/repartidores";
 
 function AdministradorMostrarRepartidores() {
   const [cuentas, setCuentas] = useState([]);
@@ -165,7 +167,7 @@ function AdministradorMostrarRepartidores() {
         <div className={`${mostrarRepartidores["flex-container"]}`}>
           <p>Imagen de perfil:</p>
           <img
-            src={`http://localhost:8080/${data.profileImg}`}
+            src={`https://back-end-ding-dong-app.herokuapp.com/${data.profileImg}`}
             alt="Imagen de perfil"
             style={{ width: 100, height: 100, borderRadius: "50%" }}
           />
