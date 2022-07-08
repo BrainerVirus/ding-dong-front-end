@@ -46,7 +46,7 @@ function LoginAdmin(props) {
   useEffect(() => {
     handleSession();
   }, []);
-  axios.defaults.withCredentials = false;
+  axios.defaults.withCredentials = true;
   // Consulta a la api para el login
   const store = async (e) => {
     e.preventDefault();
