@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //end points
-const URI = "http://localhost:8080/cuentas/logout/status";
+const URI = "https://api-ding-dong.herokuapp.com/cuentas/logout/status";
 //------------------------------------------------------
 function NavbarAdministrador() {
   //states

@@ -11,8 +11,8 @@ import "./LoginPersonasStyle.scss";
 //import AuthContext from "../context/AuthContext";
 // import { useUser, useUserUpdate } from "../context/AuthContext";
 //import { useUser } from "../context/AuthContext";
-const URI = "http://localhost:8080/cuentas/login";
-const URITipoUsuario = "http://localhost:8080/tipoUsuario";
+const URI = "https://api-ding-dong.herokuapp.com/cuentas/login";
+const URITipoUsuario = "https://api-ding-dong.herokuapp.com/tipoUsuario";
 const regexValidEmail =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|cl|com|org|net|es)\b/;
 

@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import mostrarRepartidores from "./MostrarCalificacionesRepartidorStyle.module.scss";
 import booststrap from "../../../../scss/Global/bootstrap.min.module.css";
 
-const URICuentas = "http://localhost:8080/cuentas/";
-const URIUsuarios = "http://localhost:8080/usuario/";
-const URIDirecciones = "http://localhost:8080/direccion/";
-const URITipoUsuario = "http://localhost:8080/tipoUsuario/";
+const URICuentas = "https://api-ding-dong.herokuapp.com/cuentas/";
+const URIUsuarios = "https://api-ding-dong.herokuapp.com/usuario/";
+const URIDirecciones = "https://api-ding-dong.herokuapp.com/direccion/";
+const URITipoUsuario = "https://api-ding-dong.herokuapp.com/tipoUsuario/";
 
 function AdministradorMostrarRepartidores() {
   const [cuentas, setCuentas] = useState([]);
@@ -105,7 +105,7 @@ function AdministradorMostrarRepartidores() {
         <div className={`${mostrarRepartidores["flex-container"]}`}>
           <p>Imagen de perfil:</p>
           <img
-            src={`http://localhost:8080/${data.profileImg}`}
+            src={`https://api-ding-dong.herokuapp.com/${data.profileImg}`}
             alt="Imagen de perfil"
             style={{ width: 100, height: 100, borderRadius: "50%" }}
           />

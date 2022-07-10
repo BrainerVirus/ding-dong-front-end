@@ -8,9 +8,9 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 //import defultProfileImg from "../../../img/profile/default-profile-img.jpeg";
 const qs = require("qs");
 
-const URICuentas = "http://localhost:8080/cuentas/";
-const URIUsuarios = "http://localhost:8080/usuario/";
-const URIDirecciones = "http://localhost:8080/direccion/";
+const URICuentas = "https://api-ding-dong.herokuapp.com/cuentas/";
+const URIUsuarios = "https://api-ding-dong.herokuapp.com/usuario/";
+const URIDirecciones = "https://api-ding-dong.herokuapp.com/direccion/";
 
 const RegionesYcomunas = [
   {
@@ -519,7 +519,7 @@ function AdministradorActualizarCuentaRepartidor() {
     console.log("email: " + response.data.user);
     console.log("imagen: " + response.data.profileImg);
     setEmail(response.data.user);
-    setPreview(`http://localhost:8080/${oldImg}`);
+    setPreview(`https://api-ding-dong.herokuapp.com/${oldImg}`);
     setPassword(response.data.password);
     setRePassword(response.data.password);
   };

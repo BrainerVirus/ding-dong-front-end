@@ -8,12 +8,15 @@ import { Link, useNavigate } from "react-router-dom";
 //import defultProfileImg from "../../../img/profile/default-profile-img.jpeg";
 const qs = require("qs");
 
-const URICuentas = "http://localhost:8080/cuentas/";
-const URICuentasRegister = "http://localhost:8080/cuentas/register";
-const URIUsuarios = "http://localhost:8080/usuario/";
-const URIDirecciones = "http://localhost:8080/direccion/";
-const URITipoUsuario = "http://localhost:8080/tipoUsuario/register/repartidor";
-const URICheckEmail = "http://localhost:8080/cuentas/register/verify/mail/";
+const URICuentas = "https://api-ding-dong.herokuapp.com/cuentas/";
+const URICuentasRegister =
+  "https://api-ding-dong.herokuapp.com/cuentas/register";
+const URIUsuarios = "https://api-ding-dong.herokuapp.com/usuario/";
+const URIDirecciones = "https://api-ding-dong.herokuapp.com/direccion/";
+const URITipoUsuario =
+  "https://api-ding-dong.herokuapp.com/tipoUsuario/register/repartidor";
+const URICheckEmail =
+  "https://api-ding-dong.herokuapp.com/cuentas/register/verify/mail/";
 
 const RegionesYcomunas = [
   {

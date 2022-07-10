@@ -9,8 +9,8 @@ import "./LoginAdminStyle.module.scss";
 // import PlayStoreLogo from "../../img/logos/get-it-on-google-play-logo.svg";
 // import AppStoreLogo from "../../img/logos/Download_on_the_App_Store_Badge.svg";
 
-const URI = "http://localhost:8080/cuentas/login";
-const URITipoUsuario = "http://localhost:8080/tipoUsuario";
+const URI = "https://api-ding-dong.herokuapp.com/cuentas/login";
+const URITipoUsuario = "https://api-ding-dong.herokuapp.com/tipoUsuario";
 const regexValidEmail =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|cl|com|org|net|es)\b/;
 

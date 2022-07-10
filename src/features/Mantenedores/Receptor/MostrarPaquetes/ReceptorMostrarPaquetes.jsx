@@ -6,8 +6,9 @@ import booststrap from "../../../../scss/Global/bootstrap.min.module.css";
 import fileDownload from "js-file-download";
 
 const URIAllPackagesByUserId =
-  "http://localhost:8080/paquete/usuario/all-packages/";
-const URIAllQRsByUserId = "http://localhost:8080/qr/usuario/all-qrs/";
+  "https://api-ding-dong.herokuapp.com/paquete/usuario/all-packages/";
+const URIAllQRsByUserId =
+  "https://api-ding-dong.herokuapp.com/qr/usuario/all-qrs/";
 
 function AdministradorMostrarRepartidores() {
   const [packages, setPackages] = useState([]);
@@ -80,7 +81,7 @@ function AdministradorMostrarRepartidores() {
           <p>Código para validación de identidad:</p>
           {console.log("qr id en datas: " + data.qrId)}
           <img
-            src={`http://localhost:8080/qr/identidad/${data.qrId}.png`}
+            src={`https://api-ding-dong.herokuapp.com/qr/identidad/${data.qrId}.png`}
             alt="Imagen de perfil"
             style={{ width: 150, height: 150 }}
           />
@@ -94,7 +95,7 @@ function AdministradorMostrarRepartidores() {
               e.preventDefault();
               axios
                 .get(
-                  `http://localhost:8080/qr/identidad/${data.qrId}.png`,
+                  `https://api-ding-dong.herokuapp.com/qr/identidad/${data.qrId}.png`,
                   {
                     responseType: "blob",
                   },
