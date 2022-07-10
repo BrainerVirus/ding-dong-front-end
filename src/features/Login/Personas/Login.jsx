@@ -11,10 +11,8 @@ import "./LoginPersonasStyle.scss";
 //import AuthContext from "../context/AuthContext";
 // import { useUser, useUserUpdate } from "../context/AuthContext";
 //import { useUser } from "../context/AuthContext";
-import Cookies from "js-cookie";
-const URI = "https://back-end-ding-dong-app.herokuapp.com/cuentas/login";
-const URITipoUsuario =
-  "https://back-end-ding-dong-app.herokuapp.com/tipoUsuario";
+const URI = "http://localhost:8080/cuentas/login";
+const URITipoUsuario = "http://localhost:8080/tipoUsuario";
 const regexValidEmail =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|cl|com|org|net|es)\b/;
 
@@ -32,6 +30,15 @@ function Login(props) {
   //const [user, setUser] = useState("");
   //console.log(user);
   const navigate = useNavigate();
+  //axios config
+  //axios
+  axios.defaults.withCredentials = false;
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
   // console.log(
   //   "User:" + userProvider.user + userProvider.isLogged + userProvider.role
   // );
@@ -64,26 +71,22 @@ function Login(props) {
       setRole("receptor");
     }
   }, [isToggled]);
-  const handleSession = () => {
-    Cookies.get("token");
-  };
-  useEffect(() => {
-    handleSession();
-    console.log("this are the cookies in login: " + Cookies.get("token"));
-  }, []);
   // useEffect(() => {
   //   validateMail(email);
   // }, [email]);
-  axios.defaults.withCredentials = true;
   // Consulta a la api para el login
   const store = async (e) => {
     e.preventDefault();
     if (validateMail(email) === true) {
       await axios
-        .post(URI, {
-          email: email,
-          password: password,
-        })
+        .post(
+          URI,
+          {
+            email: email,
+            password: password,
+          },
+          config
+        )
         .then((result) => {
           if (result.data.id) {
             const userAth = {
@@ -91,7 +94,12 @@ function Login(props) {
               user: result.data.user,
               usuarioId: result.data.usuarioId,
               isLogged: result.data.isLogged,
+              token: result.data.token,
             };
+            console.log(
+              "salimos del login de foma correcta sin cookies" +
+                result.data.token
+            );
             axios
               .get(URITipoUsuario + "/usuario/" + userAth.usuarioId)
               .then((res) => {
@@ -104,9 +112,11 @@ function Login(props) {
                   localStorage.setItem("id", result.data.usuarioId);
                   localStorage.setItem("isLogged", result.data.isLogged);
                   localStorage.setItem("tipoUsuario", res.data.tipoUsuario);
+                  localStorage.setItem("token", result.data.token);
                   props.changeId(result.data.usuarioId);
                   props.changeLogged(result.data.isLogged);
                   props.changeRole(res.data.tipoUsuario);
+                  props.changeToken(result.data.token);
                   Swal.fire({
                     text: "Inicio de sesion exitoso",
                     icon: "success",

@@ -6,9 +6,8 @@ import booststrap from "../../../../scss/Global/bootstrap.min.module.css";
 import fileDownload from "js-file-download";
 
 const URIAllPackagesByUserId =
-  "https://back-end-ding-dong-app.herokuapp.com/paquete/usuario/all-packages/";
-const URIAllQRsByUserId =
-  "https://back-end-ding-dong-app.herokuapp.com/qr/usuario/all-qrs/";
+  "http://localhost:8080/paquete/usuario/all-packages/";
+const URIAllQRsByUserId = "http://localhost:8080/qr/usuario/all-qrs/";
 
 function AdministradorMostrarRepartidores() {
   const [packages, setPackages] = useState([]);
@@ -16,7 +15,14 @@ function AdministradorMostrarRepartidores() {
   const [packagesAndQRs, setPackagesAndQRs] = useState([]);
   const [userLookup, setUserLookup] = useState("");
   const [isfilterByStatus, setIsFilterByStatus] = useState("todos");
-
+  //axios config
+  axios.defaults.withCredentials = false;
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
   const filterByStatus = useRef();
   //data table columns
   const columns = [
@@ -34,16 +40,17 @@ function AdministradorMostrarRepartidores() {
     defineAllPackagesAndQRsByUserId();
   }, [packages, qrs]);
 
-  axios.defaults.withCredentials = true;
   const getAllPackagesByUserId = async () => {
     const response = await axios.get(
-      URIAllPackagesByUserId + localStorage.getItem("id")
+      URIAllPackagesByUserId + localStorage.getItem("id"),
+      config
     );
     setPackages(response.data);
   };
   const getAllQRsByUserId = async () => {
     const response = await axios.get(
-      URIAllQRsByUserId + localStorage.getItem("id")
+      URIAllQRsByUserId + localStorage.getItem("id"),
+      config
     );
     setQRs(response.data);
   };
@@ -73,7 +80,7 @@ function AdministradorMostrarRepartidores() {
           <p>Código para validación de identidad:</p>
           {console.log("qr id en datas: " + data.qrId)}
           <img
-            src={`https://back-end-ding-dong-app.herokuapp.com/qr/identidad/${data.qrId}.png`}
+            src={`http://localhost:8080/qr/identidad/${data.qrId}.png`}
             alt="Imagen de perfil"
             style={{ width: 150, height: 150 }}
           />
@@ -87,10 +94,11 @@ function AdministradorMostrarRepartidores() {
               e.preventDefault();
               axios
                 .get(
-                  `https://back-end-ding-dong-app.herokuapp.com/qr/identidad/${data.qrId}.png`,
+                  `http://localhost:8080/qr/identidad/${data.qrId}.png`,
                   {
                     responseType: "blob",
-                  }
+                  },
+                  config
                 )
                 .then((res) => fileDownload(res.data, "identificadorQR.png"));
             }}

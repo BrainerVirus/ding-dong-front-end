@@ -8,14 +8,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 //import defultProfileImg from "../../../img/profile/default-profile-img.jpeg";
 const qs = require("qs");
 
-const URICuentas = "https://back-end-ding-dong-app.herokuapp.com/cuentas/";
-const URICuentasRegister =
-  "https://back-end-ding-dong-app.herokuapp.com/cuentas/register";
-const URIUsuarios = "https://back-end-ding-dong-app.herokuapp.com/usuario/";
-const URIDirecciones =
-  "https://back-end-ding-dong-app.herokuapp.com/direccion/";
-const URITipoUsuario =
-  "https://back-end-ding-dong-app.herokuapp.com/tipoUsuario/";
+const URICuentas = "http://localhost:8080/cuentas/";
+const URICuentasRegister = "http://localhost:8080/cuentas/register";
+const URIUsuarios = "http://localhost:8080/usuario/";
+const URIDirecciones = "http://localhost:8080/direccion/";
+const URITipoUsuario = "http://localhost:8080/tipoUsuario/";
 
 const RegionesYcomunas = [
   {
@@ -495,25 +492,38 @@ function ActualizarDatosAccesoAdmin() {
 
   //----------------------------------------------------------
   //first states to update
+  axios.defaults.withCredentials = false;
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
   useEffect(() => {
     getAccountData();
     getDireccionData();
     getUserData();
   }, []);
   const getAccountData = async () => {
-    const response = await axios.get(URICuentas + "/usuario/" + params.id);
+    const response = await axios.get(
+      URICuentas + "/usuario/" + params.id,
+      config
+    );
     const oldImg = response.data.profileImg;
     setOldImg(oldImg);
     console.log("oldImg: " + oldImg);
     console.log("email: " + response.data.user);
     console.log("imagen: " + response.data.profileImg);
     setEmail(response.data.user);
-    setPreview(`https://back-end-ding-dong-app.herokuapp.com/${oldImg}`);
+    setPreview(`http://localhost:8080/${oldImg}`);
     setPassword(response.data.password);
     setRePassword(response.data.password);
   };
   const getDireccionData = async () => {
-    const response = await axios.get(URIDirecciones + "/usuario/" + params.id);
+    const response = await axios.get(
+      URIDirecciones + "/usuario/" + params.id,
+      config
+    );
     console.log("comuna: " + comuna);
     const numCalleTemp = response.data.numCalle;
     console.log("num calle parseado: " + parseInt(numCalleTemp));
@@ -524,7 +534,7 @@ function ActualizarDatosAccesoAdmin() {
   };
 
   const getUserData = async () => {
-    const response = await axios.get(URIUsuarios + params.id);
+    const response = await axios.get(URIUsuarios + params.id, config);
     console.log("nombre: " + response.data.nombre);
     console.log("apellidoPaterno: " + response.data.apellidoPaterno);
     setRun(response.data.run);
@@ -830,7 +840,7 @@ function ActualizarDatosAccesoAdmin() {
     e.preventDefault();
     setReShowPassword(!showRePassword);
   };
-  axios.defaults.withCredentials = true;
+  // axios.defaults.withCredentials = true;
   const store = async (e) => {
     console.log("valid mail: " + validEmail);
     console.log("valid pass: " + validPassword);
@@ -880,7 +890,11 @@ function ActualizarDatosAccesoAdmin() {
       // }
 
       await axios
-        .put(URICuentas + "/usuario/access-data/" + params.id, cuentaData)
+        .put(
+          URICuentas + "/usuario/access-data/" + params.id,
+          cuentaData,
+          config
+        )
         .then((result) => {
           Swal.fire({
             text: "Actualización de datos exitosa",

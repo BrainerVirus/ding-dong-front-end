@@ -8,14 +8,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 //import defultProfileImg from "../../../img/profile/default-profile-img.jpeg";
 const qs = require("qs");
 
-const URICuentas = "https://back-end-ding-dong-app.herokuapp.com/cuentas/";
-const URICuentasRegister =
-  "https://back-end-ding-dong-app.herokuapp.com/cuentas/register";
-const URIUsuarios = "https://back-end-ding-dong-app.herokuapp.com/usuario/";
-const URIDirecciones =
-  "https://back-end-ding-dong-app.herokuapp.com/direccion/";
-const URITipoUsuario =
-  "https://back-end-ding-dong-app.herokuapp.com/tipoUsuario/";
+const URICuentas = "http://localhost:8080/cuentas/";
+const URICuentasRegister = "http://localhost:8080/cuentas/register";
+const URIUsuarios = "http://localhost:8080/usuario/";
+const URIDirecciones = "http://localhost:8080/direccion/";
+const URITipoUsuario = "http://localhost:8080/tipoUsuario/";
 
 const RegionesYcomunas = [
   {
@@ -492,7 +489,14 @@ function AdministradorActualizarCuentaRepartidor() {
   const params = useParams();
   const tipoUsuario = "administrador";
   const [edit, setEdit] = useState(false);
-
+  //axios config
+  axios.defaults.withCredentials = false;
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
   //----------------------------------------------------------
   //first states to update
   useEffect(() => {
@@ -501,18 +505,24 @@ function AdministradorActualizarCuentaRepartidor() {
     getUserData();
   }, []);
   const getAccountData = async () => {
-    const response = await axios.get(URICuentas + "/usuario/" + params.id);
+    const response = await axios.get(
+      URICuentas + "/usuario/" + params.id,
+      config
+    );
     const oldImg = response.data.profileImg;
     setOldProfileImg(oldImg);
     console.log("email: " + response.data.user);
     console.log("imagen: " + response.data.profileImg);
     setEmail(response.data.user);
-    setPreview(`https://back-end-ding-dong-app.herokuapp.com/${oldImg}`);
+    setPreview(`http://localhost:8080/${oldImg}`);
     setPassword(response.data.password);
     setRePassword(response.data.password);
   };
   const getDireccionData = async () => {
-    const response = await axios.get(URIDirecciones + "/usuario/" + params.id);
+    const response = await axios.get(
+      URIDirecciones + "/usuario/" + params.id,
+      config
+    );
     console.log("comuna: " + comuna);
     const numCalleTemp = response.data.numCalle;
     console.log("num calle parseado: " + parseInt(numCalleTemp));
@@ -523,7 +533,7 @@ function AdministradorActualizarCuentaRepartidor() {
   };
 
   const getUserData = async () => {
-    const response = await axios.get(URIUsuarios + params.id);
+    const response = await axios.get(URIUsuarios + params.id, config);
     console.log("nombre: " + response.data.nombre);
     console.log("apellidoPaterno: " + response.data.apellidoPaterno);
     setRun(response.data.run);
@@ -829,7 +839,6 @@ function AdministradorActualizarCuentaRepartidor() {
     e.preventDefault();
     setReShowPassword(!showRePassword);
   };
-  axios.defaults.withCredentials = true;
   const store = async (e) => {
     console.log("valid mail: " + validEmail);
     console.log("valid pass: " + validPassword);
@@ -887,17 +896,26 @@ function AdministradorActualizarCuentaRepartidor() {
         region: region,
       };
       await axios
-        .put(URIUsuarios + params.id, qs.stringify(usuarioData))
+        .put(URIUsuarios + params.id, qs.stringify(usuarioData), config)
         .then((result) => {
           if (img === "") {
             axios.put(
               URICuentas + "/usuario/access-data/" + params.id,
-              cuentaData
+              cuentaData,
+              config
             );
           } else {
-            axios.put(URICuentas + "usuario/update/" + params.id, cuentaData);
+            axios.put(
+              URICuentas + "usuario/update/" + params.id,
+              cuentaData,
+              config
+            );
           }
-          axios.put(URIDirecciones + "usuario/" + params.id, direccionData);
+          axios.put(
+            URIDirecciones + "usuario/" + params.id,
+            direccionData,
+            config
+          );
           //messege success
           //cleanStates(e);
           //handleShowMessege();

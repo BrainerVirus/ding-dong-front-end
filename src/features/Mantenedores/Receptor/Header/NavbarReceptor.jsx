@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //end points
-const URI =
-  "https://back-end-ding-dong-app.herokuapp.com/cuentas/logout/status";
+const URI = "http://localhost:8080/cuentas/logout/status";
 //------------------------------------------------------
 function NavbarReceptor() {
   //states
@@ -18,18 +17,20 @@ function NavbarReceptor() {
   const logoutId = {
     usuarioId: sessionId,
   };
-  axios.defaults.withCredentials = true;
+  //axios config
+  axios.defaults.withCredentials = false;
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
   //close session
   const handleLogout = async (e) => {
     e.preventDefault();
-    await axios
-      .put(URI, logoutId, {
-        withCredentials: true,
-        credentials: "include",
-      })
-      .then((res) => {
-        localStorage.clear();
-      });
+    await axios.put(URI, logoutId, config).then((res) => {
+      localStorage.clear();
+    });
     navigate("/");
   };
   //close navbar

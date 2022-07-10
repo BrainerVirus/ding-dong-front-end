@@ -7,16 +7,12 @@ import booststrap from "../../../scss/Global/bootstrap.min.module.css";
 const qs = require("qs");
 
 //end points
-const URICuentas = "https://back-end-ding-dong-app.herokuapp.com/cuentas/";
-const URICuentasRegister =
-  "https://back-end-ding-dong-app.herokuapp.com/cuentas/register";
-const URIUsuarios = "https://back-end-ding-dong-app.herokuapp.com/usuario/";
-const URIDirecciones =
-  "https://back-end-ding-dong-app.herokuapp.com/direccion/";
-const URITipoUsuario =
-  "https://back-end-ding-dong-app.herokuapp.com/tipoUsuario/register/receptor";
-const URICheckEmail =
-  "https://back-end-ding-dong-app.herokuapp.com/cuentas/register/verify/mail/";
+const URICuentas = "http://localhost:8080/cuentas/";
+const URICuentasRegister = "http://localhost:8080/cuentas/register";
+const URIUsuarios = "http://localhost:8080/usuario/";
+const URIDirecciones = "http://localhost:8080/direccion/";
+const URITipoUsuario = "http://localhost:8080/tipoUsuario/register/receptor";
+const URICheckEmail = "http://localhost:8080/cuentas/register/verify/mail/";
 
 //regex for email validation
 const regexValidEmail =
@@ -59,6 +55,14 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setReShowPassword] = useState(false);
   const tipoUsuario = "receptor";
+  //axios config
+  axios.defaults.withCredentials = false;
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
   //email set and validate
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -160,7 +164,7 @@ function Register() {
       const tipoUsuarioData = {
         tipoUsuario: null,
       };
-      await axios.get(URICheckEmail + email).then((res) => {
+      await axios.get(URICheckEmail + email, config).then((res) => {
         if (!res.data.user) {
           axios
             .post(URIUsuarios, qs.stringify(usuarioData))
@@ -239,11 +243,11 @@ function Register() {
             id="header-login"
           >
             <h1>
-              <i>¡Bienvenidas!</i>
+              <i>¡Bienvenidos!</i>
             </h1>
             <h2>
-              Empresas <i className="fa-solid fa-dolly" id="title-logo"></i>{" "}
-              Repartidoras
+              Usuarios <i className="fa-solid fa-dolly" id="title-logo"></i>{" "}
+              Receptores
             </h2>
           </div>
           <div id="form-wrapper">
