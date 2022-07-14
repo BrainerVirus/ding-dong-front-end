@@ -81,7 +81,7 @@ function AdministradorMostrarRepartidores() {
           <p>Código para validación de identidad:</p>
           {console.log("qr id en datas: " + data.qrId)}
           <img
-            src={`https://api-ding-dong.herokuapp.com/qr/identidad/${data.qrId}.png`}
+            src={`https://api-ding-dong.herokuapp.com/qr-identidad/${data.qrId}.png`}
             alt="Imagen de perfil"
             style={{ width: 150, height: 150 }}
           />
@@ -95,7 +95,7 @@ function AdministradorMostrarRepartidores() {
               e.preventDefault();
               axios
                 .get(
-                  `https://api-ding-dong.herokuapp.com/qr/identidad/${data.qrId}.png`,
+                  `https://api-ding-dong.herokuapp.com/qr-identidad/${data.qrId}.png`,
                   {
                     responseType: "blob",
                   },
