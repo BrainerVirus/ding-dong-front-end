@@ -516,9 +516,9 @@ function AdministradorActualizarCuentaRepartidor() {
     console.log("imagen: " + response.data.profileImg);
     setEmail(response.data.user);
     if (response.data.profileImg == "images\\default-profile-img.jpg") {
-      setImg(`https://api-ding-dong.herokuapp.com/${oldImg}`);
+      setPreview(`https://api-ding-dong.herokuapp.com/${oldImg}`);
     } else {
-      setImg(response.data.profileImg);
+      setPreview(response.data.profileImg);
     }
     //setPreview(response.data.profileImg);
     setPassword(response.data.password);
