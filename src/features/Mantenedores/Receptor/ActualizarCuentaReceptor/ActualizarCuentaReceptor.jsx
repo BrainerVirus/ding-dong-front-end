@@ -516,11 +516,13 @@ function AdministradorActualizarCuentaRepartidor() {
     console.log("imagen: " + response.data.profileImg);
     setEmail(response.data.user);
     if (response.data.profileImg == "images\\default-profile-img.jpg") {
-      setPreview(`https://api-ding-dong.herokuapp.com/${oldImg}`);
+      setPreview(
+        `https://api-ding-dong.herokuapp.com/images/default-profile-img.jpg`
+      );
     } else {
       setPreview(response.data.profileImg);
     }
-    //setPreview(response.data.profileImg);
+    setPreview(response.data.profileImg);
     setPassword(response.data.password);
     setRePassword(response.data.password);
   };
