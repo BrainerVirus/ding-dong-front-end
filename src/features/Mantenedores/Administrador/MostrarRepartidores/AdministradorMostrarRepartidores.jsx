@@ -175,7 +175,7 @@ function AdministradorMostrarRepartidores() {
         <div className={`${mostrarRepartidores["flex-container"]}`}>
           <p>Imagen de perfil:</p>
           <img
-            src={`https://api-ding-dong.herokuapp.com/${data.profileImg}`}
+            src={data.profileImg}
             alt="Imagen de perfil"
             style={{ width: 100, height: 100, borderRadius: "50%" }}
           />

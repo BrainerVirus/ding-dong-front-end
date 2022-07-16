@@ -4,13 +4,16 @@ import Swal from "sweetalert2";
 import actualizarRepatidorStyle from "./ActualizarReceptorStyle.module.scss";
 import booststrap from "../../../../scss/Global/bootstrap.min.module.css";
 import { useRef, useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 //import defultProfileImg from "../../../img/profile/default-profile-img.jpeg";
 const qs = require("qs");
 
 const URICuentas = "https://api-ding-dong.herokuapp.com/cuentas/";
+const URICuentasRegister =
+  "https://api-ding-dong.herokuapp.com/cuentas/register";
 const URIUsuarios = "https://api-ding-dong.herokuapp.com/usuario/";
 const URIDirecciones = "https://api-ding-dong.herokuapp.com/direccion/";
+const URITipoUsuario = "https://api-ding-dong.herokuapp.com/tipoUsuario/";
 
 const RegionesYcomunas = [
   {
@@ -512,7 +515,7 @@ function AdministradorActualizarCuentaRepartidor() {
     console.log("email: " + response.data.user);
     console.log("imagen: " + response.data.profileImg);
     setEmail(response.data.user);
-    setPreview(`https://api-ding-dong.herokuapp.com/${oldImg}`);
+    setPreview(response.data.profileImg);
     setPassword(response.data.password);
     setRePassword(response.data.password);
   };

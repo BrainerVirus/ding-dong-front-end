@@ -519,7 +519,7 @@ function AdministradorActualizarCuentaRepartidor() {
     console.log("email: " + response.data.user);
     console.log("imagen: " + response.data.profileImg);
     setEmail(response.data.user);
-    setPreview(`https://api-ding-dong.herokuapp.com/${oldImg}`);
+    setPreview(response.data.profileImg);
     setPassword(response.data.password);
     setRePassword(response.data.password);
   };
