@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+Documentación front end app web ding dong
+1.	Instalación local
+Primero, descargas o clonas desde github el repositorio de la APP Web.
+Ejemplo: 
+ ![image](https://user-images.githubusercontent.com/86972354/182265401-d1fe6874-3605-4da2-afe5-5e9164e2ac56.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ahora debes instalar los paquetes de “node js”, por medio del comando “npm i”, cabe decir, que se recomienda tener preinstalado “node js” 18.1.0 o superior en el equipo.
+Ya realizados los pasos anteriores, podrás levantar el servidor de React ubicándote dentro de la capeta, y luego ejecutando el comando “npm start”.
+ 
+2.	Flujo de los endpoints
+  ![image](https://user-images.githubusercontent.com/86972354/182265414-57f0bf43-e4b9-4eb3-965d-a8c0041def2b.png)
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3.	Tecnologías
+•	Como lenguaje de desarrollo se utilizó javascript.
+•	Como Frameworks, se utilizó node js, y express js.
+•	Como ORM se utilizó sequelize.
+•	Como librerías, bcryptjs, body-parser, cookie-parser, cors, dotenv, multer, jsonwebtoken, mysql2, y qrcode.
+•	Como software de gestión versiones se usó git.
+•	Como repositorio para el proyecto se utilizó github.
+4.	Detalle Tecnologías
+•	Node js: entorno controlado por eventos diseñado para crear aplicaciones escalables, permitiéndote establecer y gestionar múltiples conexiones al mismo tiempo.
+•	Express js: Framework node js que expande sus capacidades.
+•	Sequelize: ORM para Nodejs que nos permite manipular varias bases de datos SQL de una manera bastante sencilla.
+•	cors: Librería para el manejo de del protocolo de control de acceso http.
+•	jsonwebtoken: Librería que permite generar tokens.
+•	Mysl2: Librería que permite trabajar bases de datos myslq.
+•	qrcode: Librería que permite crear y trabajar con códigos qr.
+•	Nodemon: Librería para iniciar refrescar de forma automática el servidor en ambiente de desarrollo cada vez que se realicen cambios y se guarden.
